@@ -21,4 +21,4 @@ jobs:
       - name: Deploy
         run: mvn --settings settings.xml --batch-mode -V clean deploy
         env:
-          GITHUB_TOKEN: ${{ secrets.MAVEN_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
