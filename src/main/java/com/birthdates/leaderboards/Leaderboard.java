@@ -24,8 +24,8 @@ public class Leaderboard<T extends LeaderboardItem> {
     private final List<LeaderboardModule<T>> modules = new ArrayList<>();
     private final Plugin owner;
     private final Callable<T[]> allDataCallable;
+    private final LeaderboardUpdateEvent leaderboardUpdateEvent;
     private int taskID;
-    private final LeaderboardUpdateEvent leaderboardUpdateEvent = new LeaderboardUpdateEvent(this);
 
     public Leaderboard(Plugin owner, String name, Class<T> clazz, int capacity, Callable<T[]> callable) {
         //noinspection unchecked
@@ -33,6 +33,7 @@ public class Leaderboard<T extends LeaderboardItem> {
         allDataCallable = callable;
         this.name = name;
         this.owner = owner;
+        leaderboardUpdateEvent = owner != null ? new LeaderboardUpdateEvent(this) : null;
         update();
     }
 
@@ -128,6 +129,7 @@ public class Leaderboard<T extends LeaderboardItem> {
     }
 
     private void updateEvent() {
-        Bukkit.getPluginManager().callEvent(leaderboardUpdateEvent);
+        if (leaderboardUpdateEvent != null)
+            Bukkit.getPluginManager().callEvent(leaderboardUpdateEvent);
     }
 }
