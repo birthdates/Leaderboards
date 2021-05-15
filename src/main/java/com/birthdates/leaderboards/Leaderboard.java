@@ -70,7 +70,7 @@ public class Leaderboard<T extends LeaderboardItem> {
         String[] output = new String[dataCount + (spacing * dataCount)];
         int count = 0;
         for (T data : this.data) {
-            output[count] = String.format(format, data.getLeaderboardDisplayName(), count + 1);
+            output[count] = data.format(format, count+1);
             count = addSpacing(output, count + 1, spacing);
         }
         return output;
