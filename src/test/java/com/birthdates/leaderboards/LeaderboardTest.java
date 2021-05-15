@@ -16,10 +16,10 @@ public class LeaderboardTest {
         int leaderboardSize = 3;
         Leaderboard<TestItem> testLeaderboard = new Leaderboard<>(null, "Test", TestItem.class, leaderboardSize, () -> data);
 
-        TestItem[] newData = testLeaderboard.getData();
+        TestItem[] sortedData = testLeaderboard.getData();
 
-        Validate.isTrue(newData.length == leaderboardSize, "Invalid data size");
-        Validate.isTrue(isSorted(newData), "Data not sorted: " + leaderboardToString(testLeaderboard));
+        Validate.isTrue(sortedData.length == leaderboardSize, "Invalid data size");
+        Validate.isTrue(isSorted(sortedData), "Data not sorted: " + leaderboardToString(testLeaderboard));
 
         String[] messages = testLeaderboard.getMessage();
         String message = messages[0];

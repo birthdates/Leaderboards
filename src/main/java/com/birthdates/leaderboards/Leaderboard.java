@@ -74,8 +74,9 @@ public class Leaderboard<T extends LeaderboardItem> {
         int count = 0;
 
         for (T data : this.data) {
-            output[count] = data.format(format, count + 1);
-            count = addSpacing(output, count + 1, spacing);
+            int next = count + 1;
+            output[count] = data.format(format, next);
+            count = addSpacing(output, next, spacing);
         }
         return output;
     }
