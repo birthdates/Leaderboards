@@ -20,6 +20,7 @@ public class Leaderboard<T extends LeaderboardItem> {
     protected final T[] data;
     @Getter
     protected final String name;
+    
     protected Callable<T[]> allDataCallable;
     protected final List<LeaderboardModule<T>> modules = new ArrayList<>();
     private final Plugin owner;
@@ -44,14 +45,13 @@ public class Leaderboard<T extends LeaderboardItem> {
 
     /**
      * Start updating the leaderboard automatically
-     * @param interval
-     * Time between updates (milliseconds)
-     * @param async
-     * Async?
+     *
+     * @param interval Time between updates (milliseconds)
+     * @param async    Async?
      */
     public void startUpdating(float interval, boolean async) {
         long timeInTicks = Math.round(interval * 20f);
-        if(!async) {
+        if (!async) {
             this.taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(owner, this::update, timeInTicks, timeInTicks);
             return;
         }
@@ -71,15 +71,15 @@ public class Leaderboard<T extends LeaderboardItem> {
         String[] output = new String[dataCount + (spacing * dataCount)];
         int count = 0;
         for (T data : this.data) {
-            output[count++] = String.format(format, data.getLeaderboardDisplayName(), count+1);
-            count = addSpacing(output, count, spacing)+1;
+            output[count++] = String.format(format, data.getLeaderboardDisplayName(), count + 1);
+            count = addSpacing(output, count, spacing) + 1;
         }
         return output;
     }
 
     private int addSpacing(String[] arr, int index, int spacing) {
         int max = index + spacing;
-        for(int i = index; i < max; i++) {
+        for (int i = index; i < max; i++) {
             arr[i] = "";
         }
         return max;
@@ -96,7 +96,7 @@ public class Leaderboard<T extends LeaderboardItem> {
 
     public void update() {
         T[] allData = getAllData();
-        if(allData == null) return;
+        if (allData == null) return;
         updateData(allData);
     }
 
@@ -104,7 +104,7 @@ public class Leaderboard<T extends LeaderboardItem> {
         T[] data = null;
         try {
             data = allDataCallable.call();
-        } catch(Exception exception) {
+        } catch (Exception exception) {
             System.out.println("Failed to receive all data for leaderboard \"" + name + "\"");
             exception.printStackTrace();
         }

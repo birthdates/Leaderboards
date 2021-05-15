@@ -1,5 +1,6 @@
 package com.birthdates.leaderboards.module.impl;
 
+import com.birthdates.leaderboards.impl.LeaderboardItem;
 import com.birthdates.leaderboards.module.LeaderboardModule;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,12 +8,12 @@ import org.bukkit.Location;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 
-public class SignModule implements LeaderboardModule<Object> {
+public class SignModule implements LeaderboardModule<LeaderboardItem> {
 
+    private final String[] lines;
     @Getter
     @Setter
     private Location[] locations;
-    private final String[] lines;
 
     public SignModule(Location[] locations, String format) {
         this.locations = locations;
@@ -20,13 +21,13 @@ public class SignModule implements LeaderboardModule<Object> {
     }
 
     @Override
-    public void handleUpdate(Object[] data) {
+    public void handleUpdate(LeaderboardItem[] data) {
         for (int i = 0; i < data.length && i < locations.length; i++) {
-            Object obj = data[i];
+            LeaderboardItem obj = data[i];
             Location location = locations[i];
             BlockState blockState = location.getBlock().getState();
 
-            if(!(blockState instanceof Sign)) {
+            if (!(blockState instanceof Sign)) {
                 System.out.println("WARNING: SignModule (" + location.toString() + ") is not a sign!");
                 continue;
             }
@@ -34,7 +35,7 @@ public class SignModule implements LeaderboardModule<Object> {
             Sign sign = (Sign) blockState;
             for (int j = 0; j < lines.length; j++) {
                 String line = lines[j];
-                sign.setLine(j, String.format(line, obj.toString()));
+                sign.setLine(j, obj.format(line, i));
             }
         }
     }
