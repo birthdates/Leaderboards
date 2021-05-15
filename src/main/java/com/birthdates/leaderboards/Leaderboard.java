@@ -17,12 +17,12 @@ import java.util.stream.Stream;
 public class Leaderboard<T extends LeaderboardItem> {
 
     @Getter
-    protected final T[] data;
+    private final T[] data;
     @Getter
-    protected final String name;
-    protected final List<LeaderboardModule<T>> modules = new ArrayList<>();
+    private final String name;
+    private final List<LeaderboardModule<T>> modules = new ArrayList<>();
     private final Plugin owner;
-    protected Callable<T[]> allDataCallable;
+    private final Callable<T[]> allDataCallable;
     private int taskID;
 
     public Leaderboard(Plugin owner, String name, Class<T> clazz, int capacity, Callable<T[]> callable) {
@@ -100,7 +100,7 @@ public class Leaderboard<T extends LeaderboardItem> {
         updateData(allData);
     }
 
-    protected T[] getAllData() {
+    private T[] getAllData() {
         T[] data = null;
         try {
             data = allDataCallable.call();
@@ -111,14 +111,14 @@ public class Leaderboard<T extends LeaderboardItem> {
         return data;
     }
 
-    protected void updateData(T[] allData) {
+    private void updateData(T[] allData) {
         Stream<T> sortedData = Arrays.stream(allData).sorted().limit(data.length); //sort the list & limit it to the leaderboard capacity
         AtomicInteger count = new AtomicInteger(0);
         sortedData.forEach((data) -> this.data[count.getAndIncrement()] = data);
         updateModules();
     }
 
-    protected void updateModules() {
+    private void updateModules() {
         for (LeaderboardModule<T> module : modules) {
             module.handleUpdate(data);
         }
