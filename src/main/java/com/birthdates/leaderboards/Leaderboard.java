@@ -20,10 +20,9 @@ public class Leaderboard<T extends LeaderboardItem> {
     protected final T[] data;
     @Getter
     protected final String name;
-
-    protected Callable<T[]> allDataCallable;
     protected final List<LeaderboardModule<T>> modules = new ArrayList<>();
     private final Plugin owner;
+    protected Callable<T[]> allDataCallable;
     private int taskID;
 
     public Leaderboard(Plugin owner, String name, Class<T> clazz, int capacity, Callable<T[]> callable) {
@@ -72,7 +71,7 @@ public class Leaderboard<T extends LeaderboardItem> {
         int count = 0;
         for (T data : this.data) {
             output[count] = String.format(format, data.getLeaderboardDisplayName(), count + 1);
-            count = addSpacing(output, count+1, spacing);
+            count = addSpacing(output, count + 1, spacing);
         }
         return output;
     }

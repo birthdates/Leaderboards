@@ -3,10 +3,6 @@ package com.birthdates.leaderboards;
 import com.birthdates.leaderboards.impl.LeaderboardItem;
 import org.apache.commons.lang.Validate;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.stream.Collectors;
-
 public class LeaderboardTest {
 
     public LeaderboardTest() {
@@ -14,7 +10,7 @@ public class LeaderboardTest {
 
         //fill data
         for (int i = 0; i < data.length; i++) {
-            data[i] = new TestItem(Math.round(Math.random()*100f));
+            data[i] = new TestItem(Math.round(Math.random() * 100f));
         }
 
         int leaderboardSize = 3;
@@ -42,7 +38,7 @@ public class LeaderboardTest {
             long current = arr[i].rank;
             long previous = arr[i - 1].rank;
 
-            if(current <= previous) continue;
+            if (current <= previous) continue;
             return false;
         }
         return true;
