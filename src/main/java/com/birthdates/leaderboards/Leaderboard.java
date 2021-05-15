@@ -71,8 +71,8 @@ public class Leaderboard<T extends LeaderboardItem> {
         String[] output = new String[dataCount + (spacing * dataCount)];
         int count = 0;
         for (T data : this.data) {
-            output[count++] = String.format(format, data.getLeaderboardDisplayName(), count + 1);
-            count = addSpacing(output, count, spacing) + 1;
+            output[count] = String.format(format, data.getLeaderboardDisplayName(), count + 1);
+            count = addSpacing(output, count+1, spacing);
         }
         return output;
     }
@@ -112,7 +112,7 @@ public class Leaderboard<T extends LeaderboardItem> {
     }
 
     protected void updateData(T[] allData) {
-        Stream<T> sortedData = Arrays.stream(allData).sorted().limit(allData.length); //sort the list & limit it to the leaderboard capacity
+        Stream<T> sortedData = Arrays.stream(allData).sorted().limit(data.length); //sort the list & limit it to the leaderboard capacity
         AtomicInteger count = new AtomicInteger(0);
         sortedData.forEach((data) -> this.data[count.getAndIncrement()] = data);
         updateModules();
