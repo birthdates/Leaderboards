@@ -13,12 +13,15 @@ To make your own module you can simply implement `LeaderboardModule`
 
 To register one of these modules, use `Leaderboard.registerModule` or `Leaderboard.registerModules`
 
+# Events
+* `LeaderboardUpdateEvent` called on leader board update & provides type `Leaderboard`
+
 # Maven
 ```xml
 <dependency>
     <groupId>com.birthdates</groupId>
     <artifactId>leaderboards</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
     <scope>compile</scope>
 </dependency>
 ```
