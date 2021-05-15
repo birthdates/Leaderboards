@@ -1,5 +1,6 @@
 package com.birthdates.leaderboards;
 
+import com.birthdates.leaderboards.event.LeaderboardUpdateEvent;
 import com.birthdates.leaderboards.impl.LeaderboardItem;
 import com.birthdates.leaderboards.module.LeaderboardModule;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class Leaderboard<T extends LeaderboardItem> {
     private final Plugin owner;
     private final Callable<T[]> allDataCallable;
     private int taskID;
+    private final LeaderboardUpdateEvent leaderboardUpdateEvent = new LeaderboardUpdateEvent(this);
 
     public Leaderboard(Plugin owner, String name, Class<T> clazz, int capacity, Callable<T[]> callable) {
         //noinspection unchecked
@@ -116,11 +118,16 @@ public class Leaderboard<T extends LeaderboardItem> {
         AtomicInteger count = new AtomicInteger(0);
         sortedData.forEach((data) -> this.data[count.getAndIncrement()] = data);
         updateModules();
+        updateEvent();
     }
 
     private void updateModules() {
         for (LeaderboardModule<T> module : modules) {
             module.handleUpdate(data);
         }
+    }
+
+    private void updateEvent() {
+        Bukkit.getPluginManager().callEvent(leaderboardUpdateEvent);
     }
 }
