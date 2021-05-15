@@ -15,7 +15,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
-public class Leaderboard<T extends LeaderboardItem> {
+public class Leaderboard<T extends LeaderboardItem & Comparable<T>> {
 
     @Getter
     private final T[] data;
