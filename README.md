@@ -18,7 +18,7 @@ To register one of these modules, use `Leaderboard.registerModule` or `Leaderboa
 <dependency>
     <groupId>com.birthdates</groupId>
     <artifactId>leaderboards</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <scope>compile</scope>
 </dependency>
 ```
