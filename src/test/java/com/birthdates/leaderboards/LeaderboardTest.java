@@ -8,7 +8,7 @@ public class LeaderboardTest {
     public LeaderboardTest() {
         TestItem[] data = new TestItem[10];
 
-        //fill data
+        //fill with random data
         for (int i = 0; i < data.length; i++) {
             data[i] = new TestItem(Math.round(Math.random() * 100f));
         }
@@ -17,8 +17,10 @@ public class LeaderboardTest {
         Leaderboard<TestItem> testLeaderboard = new Leaderboard<>(null, "Test", TestItem.class, leaderboardSize, () -> data);
 
         TestItem[] newData = testLeaderboard.getData();
+
         Validate.isTrue(newData.length == leaderboardSize, "Invalid data size");
         Validate.isTrue(isSorted(newData), "Data not sorted: " + leaderboardToString(testLeaderboard));
+
         String[] messages = testLeaderboard.getMessage();
         String message = messages[0];
         Validate.isTrue(message.length() > 7, "Invalid message: " + String.join("\n", messages));

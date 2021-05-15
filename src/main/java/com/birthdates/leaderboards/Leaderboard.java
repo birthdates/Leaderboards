@@ -67,8 +67,9 @@ public class Leaderboard<T extends LeaderboardItem> {
 
     public String[] getMessage(String format, int spacing) {
         int dataCount = data.length;
-        String[] output = new String[dataCount + (spacing * dataCount)];
+        String[] output = new String[dataCount + (spacing * dataCount)]; //make a list of size the leaderboard & for each space
         int count = 0;
+
         for (T data : this.data) {
             output[count] = data.format(format, count+1);
             count = addSpacing(output, count + 1, spacing);
@@ -79,9 +80,9 @@ public class Leaderboard<T extends LeaderboardItem> {
     private int addSpacing(String[] arr, int index, int spacing) {
         int max = index + spacing;
         for (int i = index; i < max; i++) {
-            arr[i] = "";
+            arr[i] = ""; //make empty instead of null
         }
-        return max;
+        return max; //return next index
     }
 
     public void registerModule(LeaderboardModule<T> module) {
