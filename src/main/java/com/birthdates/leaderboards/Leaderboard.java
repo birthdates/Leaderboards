@@ -20,7 +20,7 @@ public class Leaderboard<T extends LeaderboardItem> {
     protected final T[] data;
     @Getter
     protected final String name;
-    
+
     protected Callable<T[]> allDataCallable;
     protected final List<LeaderboardModule<T>> modules = new ArrayList<>();
     private final Plugin owner;
