@@ -1,6 +1,8 @@
 package com.birthdates.leaderboards.module;
 
-public interface LeaderboardModule<E> {
+import com.birthdates.leaderboards.impl.LeaderboardItem;
 
-    void handleUpdate(E[] data);
+public interface LeaderboardModule<T extends LeaderboardItem> {
+
+    void handleUpdate(T[] data);
 }
