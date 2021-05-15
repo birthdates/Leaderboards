@@ -4,6 +4,7 @@ A module-based leaderboard system for Spigot
 # Entries
 Each entry in the leaderboard must be of type `LeaderboardItem` & `Comparable` to assist in sorting & formatting
 
+As well as this, if you are provided an array of data from the leaderboard it is sorted (i.e. [0] is the first, [1] second, e.t.c.)
 # Modules
 I've currently implemented some modules including:
 * A sign module to update signs with a format (`SignModule`)
@@ -21,7 +22,7 @@ To register one of these modules, use `Leaderboard.registerModule` or `Leaderboa
 <dependency>
     <groupId>com.birthdates</groupId>
     <artifactId>leaderboards</artifactId>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
     <scope>compile</scope>
 </dependency>
 ```
