@@ -11,12 +11,14 @@ I've currently implemented some modules including:
 
 To make your own module you can simply implement `LeaderboardModule`
 
+To register one of these modules, use `Leaderboard.registerModule` or `Leaderboard.registerModules`
+
 # Maven
 ```xml
 <dependency>
     <groupId>com.birthdates</groupId>
     <artifactId>leaderboards</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <scope>compile</scope>
 </dependency>
 ```
